@@ -1,0 +1,46 @@
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.side-title {
+    text-transform: uppercase;
+    color: $gray;
+    background: rgba(255, 255, 255, 0.16);
+    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0.16) 0%, rgba(0, 0, 0, 0.66) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255, 255, 255, 0.16)), color-stop(100%, rgba(0, 0, 0, 0.66)));
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.16) 0%, rgba(0, 0, 0, 0.66) 100%);
+    background: -o-linear-gradient(left, rgba(255, 255, 255, 0.16) 0%, rgba(0, 0, 0, 0.66) 100%);
+    background: -ms-linear-gradient(left, rgba(255, 255, 255, 0.16) 0%, rgba(0, 0, 0, 0.66) 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.16) 0%, rgba(0, 0, 0, 0.66) 100%);
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    padding-right: 20px;
+    padding-left: 100%;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.menu {
+    background-color: $orange;
+    font-size: 30px;
+    button {
+        background-color: $orange;
+    }
+    ion-label {
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+    }
+    ion-icon {
+        font-size: 30px;
+        padding: 10px;
+    }
+    .item-md {
+        color: $gray;
+    }
+}
+
+.menu-footer {
+    color: $orange;
+}

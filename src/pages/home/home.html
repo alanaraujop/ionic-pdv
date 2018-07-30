@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>Rei dos Pisos</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <perfil></perfil>
+    <div class="btn-menu" (click)="openPdv()">
+        <ion-icon name="cart"></ion-icon>
+        <h2>PDV</h2>
+    </div>
+    <div class="btn-menu" (click)="openCliente()">
+        <ion-icon name="person"></ion-icon>
+        <h2>CLIENTE</h2>
+    </div>
+</ion-content>

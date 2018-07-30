@@ -1,0 +1,19 @@
+<ion-content padding>
+    <div class="overlay">
+        <img src="../../assets/icon/point-of-sale.png" alt="logo">
+        <div class="form" padding>
+            <ion-item class="transparent">
+                <ion-input [(ngModel)]="login.nome" name="nome" type="text" placeholder="Nome">
+                </ion-input>
+            </ion-item>
+            <!-- <h6 *ngIf="errorEmail" class="error"> {{messageEmail}}</h6> -->
+            <ion-item class="transparent">
+                <ion-input [(ngModel)]="login.senha" type="password" placeholder="Senha">
+                </ion-input>
+            </ion-item>
+            <!-- <h6 *ngIf="errorPassword" class="error"> {{messagePassword}}</h6> -->
+            <button ion-button block outline color="secondary" class="login-button" (click)="logar()">Login</button>
+        </div>
+
+    </div>
+</ion-content>

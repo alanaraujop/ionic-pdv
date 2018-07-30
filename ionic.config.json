@@ -1,0 +1,7 @@
+{
+  "name": "pdv",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

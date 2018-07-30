@@ -1,0 +1,28 @@
+page-home {
+    .scroll-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        // background-color: $gray;
+    }
+    .btn-menu {
+        -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.33);
+        -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.33);
+        box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.33);
+        margin: 20px;
+        border-radius: 20px;
+        width: 250px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border: dashed $gray;
+        color: $blue;
+        // background-color: white;
+        ion-icon {
+            font-size: 45px;
+        }
+    }
+}
