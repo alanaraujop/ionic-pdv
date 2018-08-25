@@ -2,13 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Orcamento, Cliente } from '../../model/orcamento';
 import { Produto } from '../../model/produto';
+import { ClienteProvider } from '../../providers/cliente/cliente';
+import { ClienteFormPage } from '../cliente-form/cliente-form'
 
-/**
- * Generated class for the ClientePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -17,16 +13,30 @@ import { Produto } from '../../model/produto';
 })
 export class ClientePage {
 
-  orcamento: Cliente;
+   public cliente = new Cliente(); 
+   public clientes: Array<Cliente>;
 
+  // public clienteProvider = new ClienteProvider();
   
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private clienteProvider: ClienteProvider
+  ) {
+      
   }
     
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ClientePage');
+    this.clienteProvider.getAllCliente().toPromise().then(res => this.clientes = res);
+//    this.clienteProvider.getAllCliente().map((res:Array<Cliente>)=>res).subscribe(res => this.clientes = res);
+  }
+
+  EditarCliente(cliente){  
+    this.navCtrl.push(ClienteFormPage, {str : JSON.stringify(cliente)});
+  }
+
+  CadastrarCliente(){
+    this.navCtrl.push(ClienteFormPage, {str : JSON.stringify(this.cliente)});
   }
 
 }

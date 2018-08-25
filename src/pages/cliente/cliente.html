@@ -8,14 +8,19 @@
 
     <ion-navbar>
         <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
+        <ion-icon name="menu"></ion-icon>
+      </button>
         <ion-title>Clientes</ion-title>
+        <ion-icon name="add" (click)="CadastrarCliente()"></ion-icon>
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <ion-list>
+        <button ion-item *ngFor="let cliente of clientes" (click)="EditarCliente(cliente)">
+    {{ cliente.nome }}
+  </button>
+    </ion-list>
 </ion-content>
