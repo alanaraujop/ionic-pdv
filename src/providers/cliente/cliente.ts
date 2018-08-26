@@ -1,41 +1,40 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, EventEmitter } from '@angular/core';
-import { Funcionario, Cliente } from '../../model/orcamento';
+import { Injectable } from '@angular/core';
+import { Cliente } from '../../model/orcamento';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Config } from '../../assets/config';
 import { Observable } from 'rxjs/Observable';
-import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class ClienteProvider {
   config = new Config;
   public cliente: Cliente;
-
+  
   constructor(
-    public http: HttpClient   
+    public http: HttpClient
   ) {
-   
+  
   }
+
 
   getCliente(id:number):Observable<any>{
-     return this.http.get(this.config.url + "Cliente/" + id);
+    return this.http.get(this.config.url + "Cliente/" + id);
   }
 
-  getAllCliente():Observable<any>{
-    return this.http.get(this.config.url + "Cliente");    
+  getAllCliente():Observable<Array<Cliente>>{
+    return this.http.get(this.config.url + "Cliente").map((res:Array<Cliente>)=>res);    
   }
 
   postCliente(_cliente: Cliente){
-    return this.http.post(this.config.url+"Cliente?", _cliente);
+    return this.http.post(this.config.url+"Cliente?", _cliente, {responseType: 'text'});
   }
 
-  updateCliente(_cliente: Cliente){
-    return this.http.put(this.config.url+"Cliente/" + _cliente.codCliente, _cliente);
+  updateCliente(_cliente: Cliente):Observable<string>{
+    return this.http.put(this.config.url+"Cliente/" + _cliente.codCliente, _cliente, {responseType: 'text'});
   }
 
   deleteCliente(_cliente: Cliente){
     return this.http.delete(this.config.url+"Cliente/" + _cliente.codCliente);
   }
-
 }

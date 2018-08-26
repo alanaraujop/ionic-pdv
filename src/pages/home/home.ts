@@ -1,7 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { DadosProvider } from '../../providers/dados/dados';
-// import { DataTableComponent } from '../../components/data-table/data-table';
 import { PdvPage } from '../pdv/pdv';
 import { ClientePage } from '../cliente/cliente';
 import { LoginProvider } from '../../providers/login/login';

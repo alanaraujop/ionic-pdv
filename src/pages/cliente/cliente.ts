@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Orcamento, Cliente } from '../../model/orcamento';
 import { Produto } from '../../model/produto';
 import { ClienteProvider } from '../../providers/cliente/cliente';
@@ -14,24 +14,26 @@ import { ClienteFormPage } from '../cliente-form/cliente-form'
 export class ClientePage {
 
    public cliente = new Cliente(); 
-   public clientes: Array<Cliente>;
-
-  // public clienteProvider = new ClienteProvider();
-  
+   public clientes = new Array<Cliente>();
+    
   constructor(
+    public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     public navParams: NavParams,
     private clienteProvider: ClienteProvider
   ) {
-      
+   
   }
     
   ionViewDidLoad() {
-    this.clienteProvider.getAllCliente().toPromise().then(res => this.clientes = res);
-//    this.clienteProvider.getAllCliente().map((res:Array<Cliente>)=>res).subscribe(res => this.clientes = res);
+    let load = this.loadingCtrl.create({content:"Aguarde um momento..."});
+    load.present();
+    this.clienteProvider.getAllCliente().subscribe(res =>this.clientes = res, err => console.log(err), ()=>load.dismiss());
   }
 
-  EditarCliente(cliente){  
+  
+
+  EditarCliente(cliente){      
     this.navCtrl.push(ClienteFormPage, {str : JSON.stringify(cliente)});
   }
 
@@ -39,4 +41,6 @@ export class ClientePage {
     this.navCtrl.push(ClienteFormPage, {str : JSON.stringify(this.cliente)});
   }
 
+
+  
 }

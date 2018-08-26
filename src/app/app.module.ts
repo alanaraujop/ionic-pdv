@@ -19,6 +19,8 @@ import { DataTableComponent } from '../components/data-table/data-table';
 import { LoginProvider } from '../providers/login/login';
 import { IonicStorageModule } from '@ionic/storage';
 import { PerfilComponent } from '../components/perfil/perfil';
+import { ClienteFormPage } from '../pages/cliente-form/cliente-form';
+import { LoadingProvider } from '../providers/loading/loading';
 // import { ComponentsModule } from '../components/components.module';
 
 
@@ -30,7 +32,8 @@ import { PerfilComponent } from '../components/perfil/perfil';
     PdvPage,
     ClientePage,
     LoginPage,
-    PerfilComponent
+    PerfilComponent,
+    ClienteFormPage
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import { PerfilComponent } from '../components/perfil/perfil';
     ListPage,
     ClientePage,
     PdvPage,
-    LoginPage
+    LoginPage,
+    ClienteFormPage
   ],
   providers: [
     StatusBar,
@@ -55,7 +59,8 @@ import { PerfilComponent } from '../components/perfil/perfil';
     DadosProvider,
     ClienteProvider,
     OrcamentoProvider,
-    LoginProvider
+    LoginProvider,
+    LoadingProvider
   ]
 })
 export class AppModule {}

@@ -9,8 +9,6 @@ import { PdvPage } from '../pages/pdv/pdv';
 import { ClientePage } from '../pages/cliente/cliente';
 import { LoginPage } from '../pages/login/login';
 import { Storage } from '@ionic/storage';
-import { PerfilComponent } from '../components/perfil/perfil'
-// import { Funcionario } from '../model/orcamento';
 
 import { LoginProvider } from '../providers/login/login';
 

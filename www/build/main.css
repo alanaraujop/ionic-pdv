@@ -25733,6 +25733,32 @@ ion-navbar.toolbar {
   color: #f19f4d;
 }
 
+page-cliente .toolbar-content-md {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+page-cliente .icon {
+  color: #fff;
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+page-cliente-form .toolbar-content-md {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+page-cliente-form .icon {
+  color: #fff;
+  font-size: 20px;
+  margin-right: 15px;
+}
+
 page-home .scroll-content {
   display: -webkit-box;
   display: -webkit-flex;

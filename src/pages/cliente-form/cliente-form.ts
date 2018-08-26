@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Cliente } from '../../model/orcamento';
 import { ClienteProvider } from '../../providers/cliente/cliente';
 
@@ -12,7 +12,12 @@ export class ClienteFormPage {
 
   public cliente = new Cliente();
 
-  constructor(public clienteProvider: ClienteProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public clienteProvider: ClienteProvider, 
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController
+  ) {
   }
 
   ionViewDidLoad() {
@@ -20,11 +25,18 @@ export class ClienteFormPage {
   }
 
   saveCliente(){
-    console.log(this.cliente);
-    if(this.cliente.codCliente == -1)
-    this.clienteProvider.postCliente(this.cliente).toPromise().then(res=>this.navCtrl.pop()).catch(res=>console.log(res));
-    else
-    this.clienteProvider.updateCliente(this.cliente).toPromise().then(res=>console.log(res)).catch(res=>console.log(res));
-  }
 
+    let load = this.loadingCtrl.create({content: "Aguarde um momento..."});
+    load.present();   
+    if(this.cliente.codCliente == -1)
+      this.clienteProvider.postCliente(this.cliente).subscribe(res=>this.navCtrl.pop(), err=>console.log(err), () => {
+        this.navCtrl.pop();
+        load.dismiss();
+      });
+    else
+      this.clienteProvider.updateCliente(this.cliente).subscribe(res=>console.log(res), err=>console.log(err),  () => {
+        this.navCtrl.pop();
+        load.dismiss();
+      });
+  }
 }
