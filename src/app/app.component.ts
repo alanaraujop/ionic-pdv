@@ -41,6 +41,14 @@ export class MyApp {
       { title: 'CLIENTE', component: ClientePage, icon: "person" },
     ];
 
+    platform.registerBackButtonAction(()=>{
+      if(this.nav.getActive().component==HomePage || this.nav.getActive().component==LoginPage){
+         if(confirm("Deseja Encerrar?"))
+         platform.exitApp();
+      } else
+          this.nav.pop();
+    }, 1);
+
   }
 
   initializeApp() {
@@ -50,18 +58,22 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.login.emitirUsuario.subscribe(res=>this.usuario=res);
+      
     });
   }
 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.usuario = this.login.usuario;
-    console.log("Muda pagina");
-    this.nav.setRoot(page.component);
+    if(page.component==HomePage)
+      this.nav.setRoot(page.component);
+    else  
+      this.nav.push(page.component);
   }
   logout(){
     this.nav.setRoot(LoginPage);
     this.storage.clear();
   }
+
+  
 }

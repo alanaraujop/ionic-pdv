@@ -7,6 +7,7 @@
 <ion-header>
 
     <ion-navbar class="barra-menu">
+        <!-- <ion-icon name="arrow-back" navPop></ion-icon> -->
         <ion-title>Informaçõe do Cliente</ion-title>
         <ion-icon name="md-albums" (click)="saveCliente()"></ion-icon>
     </ion-navbar>
@@ -17,7 +18,7 @@
 <ion-content padding>
     <ion-item>
         <ion-label floating>Nome</ion-label>
-        <ion-input type="text" [(ngModel)]="cliente.nome" name="nome"></ion-input>
+        <ion-input type="text" [(ngModel)]="cliente.nome" name="nome" (input)="upper(cliente.nome)"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label floating>CEP</ion-label>

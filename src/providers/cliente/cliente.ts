@@ -26,13 +26,13 @@ export class ClienteProvider {
     return this.http.get(this.config.url + "Cliente").map((res:Array<Cliente>)=>res);    
   }
 
-  postCliente(_cliente: Cliente){
+  saveCliente(_cliente: Cliente){
     return this.http.post(this.config.url+"Cliente?", _cliente, {responseType: 'text'});
   }
 
-  updateCliente(_cliente: Cliente):Observable<string>{
-    return this.http.put(this.config.url+"Cliente/" + _cliente.codCliente, _cliente, {responseType: 'text'});
-  }
+  // updateCliente(_cliente: Cliente):Observable<string>{
+  //   return this.http.put(this.config.url+"Cliente/" + _cliente.codCliente, _cliente, {responseType: 'text'});
+  // }
 
   deleteCliente(_cliente: Cliente){
     return this.http.delete(this.config.url+"Cliente/" + _cliente.codCliente);

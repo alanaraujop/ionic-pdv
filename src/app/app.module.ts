@@ -15,12 +15,13 @@ import { DadosProvider } from '../providers/dados/dados';
 import { ClienteProvider } from '../providers/cliente/cliente';
 import { OrcamentoProvider } from '../providers/orcamento/orcamento';
 import { HttpClientModule } from '@angular/common/http';
-import { DataTableComponent } from '../components/data-table/data-table';
 import { LoginProvider } from '../providers/login/login';
 import { IonicStorageModule } from '@ionic/storage';
 import { PerfilComponent } from '../components/perfil/perfil';
 import { ClienteFormPage } from '../pages/cliente-form/cliente-form';
 import { LoadingProvider } from '../providers/loading/loading';
+import { PipesModule } from '../pipes/pipes.module';
+import { OrderModule } from 'ngx-order-pipe';
 // import { ComponentsModule } from '../components/components.module';
 
 
@@ -40,6 +41,9 @@ import { LoadingProvider } from '../providers/loading/loading';
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     HttpClientModule,
+    OrderModule,
+    PipesModule
+    
     // ComponentsModule
   ],
   bootstrap: [IonicApp],

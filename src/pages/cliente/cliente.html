@@ -18,9 +18,17 @@
 
 
 <ion-content padding>
+    <ion-item>
+        <ion-label floating>Buscar por Nome</ion-label>
+        <ion-input type="text" name="nome" (keyup)="debounce.next($event.target.value)"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Exibir Inativo</ion-label>
+        <ion-checkbox [(ngModel)]="exibirInativo" color="blue" checked="true"></ion-checkbox>
+    </ion-item>
     <ion-list>
-        <button ion-item *ngFor="let cliente of clientes" (click)="EditarCliente(cliente)">
-    {{ cliente.nome }}
+        <button ion-item *ngFor="let cliente of clientes | filter: nomeFilter | orderBy : 'nome' : 0 : 1 " (click)="EditarCliente(cliente)">
+    {{ cliente.nome  }}
   </button>
     </ion-list>
 </ion-content>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Cliente } from '../../model/orcamento';
 import { ClienteProvider } from '../../providers/cliente/cliente';
+import { ClientePage } from '../cliente/cliente';
+import { UpperPipe } from  '../../pipes/upper/upper';
 
 @IonicPage()
 @Component({
@@ -21,22 +23,30 @@ export class ClienteFormPage {
   }
 
   ionViewDidLoad() {
-    this.cliente = JSON.parse(this.navParams.get('str'));
+    this.cliente = this.navParams.get('clienteSelecionado');
+  }
+
+  back(){
+    this.navCtrl.setRoot(ClientePage);
+  }
+
+  upper(val: string){
+      this.cliente.nome = val.toString().toUpperCase();
+      console.log(this.cliente.nome);
   }
 
   saveCliente(){
 
     let load = this.loadingCtrl.create({content: "Aguarde um momento..."});
     load.present();   
-    if(this.cliente.codCliente == -1)
-      this.clienteProvider.postCliente(this.cliente).subscribe(res=>this.navCtrl.pop(), err=>console.log(err), () => {
-        this.navCtrl.pop();
-        load.dismiss();
-      });
-    else
-      this.clienteProvider.updateCliente(this.cliente).subscribe(res=>console.log(res), err=>console.log(err),  () => {
-        this.navCtrl.pop();
-        load.dismiss();
-      });
+   
+    this.clienteProvider.saveCliente(this.cliente).map(res=>JSON.parse(res)).subscribe(
+      res=>{console.log(res); if(res.Type == "Error"){alert("Ocorreu um erro ao salvar")}},
+      err=>{alert("Ocorreu um erro ao salvar"); console.log(err)}, 
+      () => {
+      load.dismiss();        
+      this.navCtrl.setRoot(ClientePage);
+    });
+
   }
 }

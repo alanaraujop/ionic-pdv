@@ -1,9 +1,10 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { DadosProvider } from '../../providers/dados/dados';
 import { PdvPage } from '../pdv/pdv';
 import { ClientePage } from '../cliente/cliente';
 import { LoginProvider } from '../../providers/login/login';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -14,19 +15,20 @@ export class HomePage {
   public itens = [];
   lista: any;
 
-  constructor(public login: LoginProvider, public navCtrl: NavController, public dados: DadosProvider) {    
-  }
-
-  ionViewDidLoad(){
-  
+  constructor(
+    public login: LoginProvider, 
+    public navCtrl: NavController, 
+    public dados: DadosProvider
+  ) {  
   }
 
   
   openPdv(){
-    this.navCtrl.setRoot(PdvPage);
+    console.log(this.navCtrl.getActive());
+    //this.navCtrl.push(PdvPage);
   }  
 
   openCliente(){
-    this.navCtrl.setRoot(ClientePage);
+    this.navCtrl.push(ClientePage);
   }
 }
