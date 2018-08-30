@@ -44,8 +44,9 @@ export class ClienteFormPage {
       res=>{console.log(res); if(res.Type == "Error"){alert("Ocorreu um erro ao salvar")}},
       err=>{alert("Ocorreu um erro ao salvar"); console.log(err)}, 
       () => {
-      load.dismiss();        
-      this.navCtrl.setRoot(ClientePage);
+      load.dismiss();  
+      this.navCtrl.pop();
+     // this.navCtrl.setRoot(ClientePage);
     });
 
   }
