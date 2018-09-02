@@ -1,11 +1,9 @@
 import { Component, OnInit, Inject, OnDestroy, NgModule, VERSION } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Orcamento, Cliente } from '../../model/orcamento';
-import { Produto } from '../../model/produto';
 import { ClienteProvider } from '../../providers/cliente/cliente';
 import { ClienteFormPage } from '../cliente-form/cliente-form';
 import { OrderPipe } from 'ngx-order-pipe';
-import { UpperPipe } from '../../pipes/upper/upper';
 import { FilterPipe } from '../../pipes/filter/filter';
 
 import { Subject } from 'rxjs/Subject';
@@ -16,7 +14,7 @@ import { debounceTime } from 'rxjs/Operators';
 
 import { AlertController } from 'ionic-angular';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-cliente',
   templateUrl: 'cliente.html',
@@ -55,18 +53,13 @@ export class ClientePage implements OnInit, OnDestroy {
   }
 
   EditarCliente(cliente) {
-    this.navCtrl.push(ClienteFormPage, { clienteSelecionado: cliente });
+    this.navCtrl.push(ClienteFormPage.name, { clienteSelecionado: cliente });
   }
 
   CadastrarCliente() {
     let cliente = new Cliente();
-    this.navCtrl.push(ClienteFormPage, { clienteSelecionado: cliente });
+    this.navCtrl.push(ClienteFormPage.name, { clienteSelecionado: cliente });
   }
-
-  upper(val: string) {
-    this.nomeFilter = val.toString().toUpperCase();
-  }
-
 
   ngOnInit() {
   }
