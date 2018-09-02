@@ -9,7 +9,8 @@
     <ion-navbar class="barra-menu">
         <!-- <ion-icon name="arrow-back" navPop></ion-icon> -->
         <ion-title>Informaçõe do Cliente</ion-title>
-        <ion-icon name="md-albums" (click)="saveCliente()"></ion-icon>
+        <img src="./assets/icon/save.svg" alt="Salvar" (click)="saveCliente()">
+        <!-- <ion-icon name="md-albums" "></ion-icon> -->
     </ion-navbar>
 
 </ion-header>
@@ -18,11 +19,11 @@
 <ion-content padding>
     <ion-item>
         <ion-label floating>Nome</ion-label>
-        <ion-input type="text" [(ngModel)]="cliente.nome" name="nome" (input)="upper(cliente.nome)"></ion-input>
+        <ion-input type="text" [(ngModel)]="cliente.nome" name="nome" upper></ion-input>
     </ion-item>
     <ion-item>
         <ion-label floating>CEP</ion-label>
-        <ion-input type="text" [(ngModel)]="cliente.cep" name="cep"></ion-input>
+        <ion-input type="text" [(ngModel)]="cliente.cep" name="cep" (keyup)="buscarCep($event.target.value)"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label floating>Endereço</ion-label>

@@ -58,7 +58,6 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.login.emitirUsuario.subscribe(res=>this.usuario=res);
-      console.log(this.nav.getAllChildNavs());
       this.nav.setPages(this.nav.getViews(), {animate: true, animation: "slide"})
       
     });

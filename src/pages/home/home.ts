@@ -14,21 +14,14 @@ import { LoginPage } from '../login/login';
 export class HomePage {
   public itens = [];
   lista: any;
+  private pdvPage = PdvPage;
+  private clientePage = ClientePage;
 
   constructor(
     public login: LoginProvider, 
     public navCtrl: NavController, 
     public dados: DadosProvider
   ) {  
-  }
-
-  
-  openPdv(){
-    console.log(this.navCtrl.getActive());
-    //this.navCtrl.push(PdvPage);
+    
   }  
-
-  openCliente(){
-    this.navCtrl.push(ClientePage);
-  }
 }

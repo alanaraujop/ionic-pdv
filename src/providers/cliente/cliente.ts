@@ -18,6 +18,10 @@ export class ClienteProvider {
   }
 
 
+  getEndereco(cep: string): Observable<any>{
+    return this.http.get("http://viacep.com.br/ws/"+cep+"/json/ ");
+  }
+
   getCliente(id:number):Observable<any>{
     return this.http.get(this.config.url + "Cliente/" + id);
   }

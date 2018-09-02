@@ -26,17 +26,23 @@ export class ClienteFormPage {
     this.cliente = this.navParams.get('clienteSelecionado');
   }
 
-  back(){
-    this.navCtrl.setRoot(ClientePage);
-  }
-
-  upper(val: string){
-      this.cliente.nome = val.toString().toUpperCase();
-      console.log(this.cliente.nome);
+  buscarCep(cep){
+    if(cep.length==8){
+      console.log(cep);
+      this.clienteProvider.getEndereco(cep).
+      subscribe(
+        res=>{
+          this.cliente.bairro = res.bairro;
+          this.cliente.endereco = res.logradouro;
+          this.cliente.uf = res.uf;
+          this.cliente.municipio = res.localidade;
+        }
+      );
+    }
+    
   }
 
   saveCliente(){
-
     let load = this.loadingCtrl.create({content: "Aguarde um momento..."});
     load.present();   
    
@@ -46,7 +52,6 @@ export class ClienteFormPage {
       () => {
       load.dismiss();  
       this.navCtrl.pop();
-     // this.navCtrl.setRoot(ClientePage);
     });
 
   }
