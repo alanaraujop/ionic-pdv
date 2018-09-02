@@ -9,5 +9,8 @@ import { ClienteFormPage } from './cliente-form';
   imports: [
     IonicPageModule.forChild(ClienteFormPage),
   ],
+  exports: [
+    ClienteFormPage
+  ]
 })
 export class ClienteFormPageModule {}

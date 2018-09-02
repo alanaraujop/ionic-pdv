@@ -19,7 +19,7 @@
 <ion-content padding>
     <ion-item>
         <ion-label floating>Nome</ion-label>
-        <ion-input type="text" [(ngModel)]="cliente.nome" name="nome" upper></ion-input>
+        <ion-input type="text" [(ngModel)]="cliente.nome" name="nome" (input)="upper($event.target.value)"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label floating>CEP</ion-label>

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Toast, ToastController } from 'ionic-angular';
 import { Cliente } from '../../model/orcamento';
 import { ClienteProvider } from '../../providers/cliente/cliente';
-import { ClientePage } from '../cliente/cliente';
 import { UpperPipe } from  '../../pipes/upper/upper';
 
 @IonicPage()
@@ -18,13 +17,19 @@ export class ClienteFormPage {
     public clienteProvider: ClienteProvider, 
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public toast: ToastController
   ) {
   }
 
   ionViewDidLoad() {
     this.cliente = this.navParams.get('clienteSelecionado');
   }
+
+  upper(val: string) {
+    this.cliente.nome = val.toUpperCase();
+  }
+
 
   buscarCep(cep){
     if(cep.length==8){
@@ -47,8 +52,19 @@ export class ClienteFormPage {
     load.present();   
    
     this.clienteProvider.saveCliente(this.cliente).map(res=>JSON.parse(res)).subscribe(
-      res=>{console.log(res); if(res.Type == "Error"){alert("Ocorreu um erro ao salvar")}},
-      err=>{alert("Ocorreu um erro ao salvar"); console.log(err)}, 
+      res=>{
+        console.log(res); 
+        if(res.Type == "Error"){
+          this.toast.create({message:"Ocorreu um erro ao salvar", duration:3000, position:"botton"}).present();
+        }
+        else
+        this.toast.create({message:"Cliente salvo com sucesso!", duration:3000, position:"botton"}).present();
+      },
+      err=>{
+        alert("Ocorreu um erro ao salvar"); 
+        this.toast.create({message:"Ocorreu um erro ao salvar", duration:3000, position:"botton"}).present();
+        console.log(err)
+      }, 
       () => {
       load.dismiss();  
       this.navCtrl.pop();
