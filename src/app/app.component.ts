@@ -11,6 +11,7 @@ import { LoginPage } from '../pages/login/login';
 import { Storage } from '@ionic/storage';
 
 import { LoginProvider } from '../providers/login/login';
+import { ProdutoPage } from '../pages/produto/produto';
 
 @Component({
   templateUrl: 'app.html'
@@ -39,6 +40,7 @@ export class MyApp {
       { title: 'HOME', component: HomePage, icon: "home" },
       { title: 'PDV', component: PdvPage, icon: "cart" },
       { title: 'CLIENTE', component: ClientePage, icon: "person" },
+      { title: 'PRODUTO', component: ProdutoPage, icon: "cube" },
     ];
 
     platform.registerBackButtonAction(()=>{

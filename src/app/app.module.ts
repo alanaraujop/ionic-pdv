@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule} from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
@@ -21,6 +21,8 @@ import { LoadingProvider } from '../providers/loading/loading';
 import { PipesModule } from '../pipes/pipes.module';
 import { OrderModule } from 'ngx-order-pipe';
 import { LoginPageModule } from '../pages/login/login.module';
+import { ProdutoProvider } from '../providers/produto/produto';
+import { ProdutoPageModule } from '../pages/produto/produto.module';
 // import { ComponentsModule } from '../components/components.module';
 
 
@@ -38,7 +40,8 @@ import { LoginPageModule } from '../pages/login/login.module';
     HttpClientModule,
     OrderModule,
     PipesModule,
-    LoginPageModule
+    LoginPageModule,
+    ProdutoPageModule
     // ComponentsModule
   ],
   bootstrap: [IonicApp],
@@ -58,7 +61,8 @@ import { LoginPageModule } from '../pages/login/login.module';
     ClienteProvider,
     OrcamentoProvider,
     LoginProvider,
-    LoadingProvider
+    LoadingProvider,
+    ProdutoProvider
   ]
 })
 export class AppModule {}
