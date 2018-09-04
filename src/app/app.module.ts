@@ -17,11 +17,10 @@ import { OrcamentoProvider } from '../providers/orcamento/orcamento';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginProvider } from '../providers/login/login';
 import { IonicStorageModule } from '@ionic/storage';
-import { PerfilComponent } from '../components/perfil/perfil';
-import { ClienteFormPage } from '../pages/cliente-form/cliente-form';
 import { LoadingProvider } from '../providers/loading/loading';
 import { PipesModule } from '../pipes/pipes.module';
 import { OrderModule } from 'ngx-order-pipe';
+import { LoginPageModule } from '../pages/login/login.module';
 // import { ComponentsModule } from '../components/components.module';
 
 
@@ -31,19 +30,15 @@ import { OrderModule } from 'ngx-order-pipe';
     HomePage,
     ListPage,
     PdvPage,
-    ClientePage,
-    LoginPage,
-    PerfilComponent,
-    ClienteFormPage
-  ],
+    ClientePage ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     HttpClientModule,
     OrderModule,
-    PipesModule
-    
+    PipesModule,
+    LoginPageModule
     // ComponentsModule
   ],
   bootstrap: [IonicApp],
@@ -53,9 +48,8 @@ import { OrderModule } from 'ngx-order-pipe';
     ListPage,
     ClientePage,
     PdvPage,
-    LoginPage,
-    ClienteFormPage
-  ],
+    LoginPage
+    ],
   providers: [
     StatusBar,
     SplashScreen,

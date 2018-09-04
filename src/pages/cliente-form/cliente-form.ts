@@ -24,12 +24,12 @@ export class ClienteFormPage {
 
   ionViewDidLoad() {
     this.cliente = this.navParams.get('clienteSelecionado');
+    
   }
 
   upper(val: string) {
     this.cliente.nome = val.toUpperCase();
   }
-
 
   buscarCep(cep){
     if(cep.length==8){
@@ -47,18 +47,23 @@ export class ClienteFormPage {
     
   }
 
-  saveCliente(){
+  saveCliente(_cliente){
     let load = this.loadingCtrl.create({content: "Aguarde um momento..."});
     load.present();   
    
-    this.clienteProvider.saveCliente(this.cliente).map(res=>JSON.parse(res)).subscribe(
+    this.clienteProvider.saveCliente(_cliente).map(res=>JSON.parse(res)).subscribe(
       res=>{
         console.log(res); 
         if(res.Type == "Error"){
           this.toast.create({message:"Ocorreu um erro ao salvar", duration:3000, position:"botton"}).present();
         }
-        else
-        this.toast.create({message:"Cliente salvo com sucesso!", duration:3000, position:"botton"}).present();
+        else{
+          if(res.nome){
+            this.clienteProvider.addCliente(res);
+            this.toast.create({message:"Cliente salvo com sucesso!", duration:3000, position:"botton"}).present();
+          } else
+            this.toast.create({message:"Cliente atualizado com sucesso!", duration:3000, position:"botton"}).present();
+        }
       },
       err=>{
         alert("Ocorreu um erro ao salvar"); 

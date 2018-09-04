@@ -5,18 +5,30 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Config } from '../../assets/config';
 import { Observable } from 'rxjs/Observable';
+import { LoadingController } from 'ionic-angular';
 
 @Injectable()
 export class ClienteProvider {
   config = new Config;
-  public cliente: Cliente;
+  private cliente: Cliente;
+  private clientes: Array<Cliente>;
   
   constructor(
-    public http: HttpClient
-  ) {
-  
+    private http: HttpClient
+  ) {  
   }
 
+  getAllCliente(){
+    return this.clientes;
+  }
+
+  setAllCliente(_clientes){
+    this.clientes = _clientes;  
+  }
+
+  addCliente(_cliente){
+    this.clientes.push(_cliente);
+  }
 
   getEndereco(cep: string): Observable<any>{
     return this.http.get("http://viacep.com.br/ws/"+cep+"/json/ ");
@@ -26,9 +38,16 @@ export class ClienteProvider {
     return this.http.get(this.config.url + "Cliente/" + id);
   }
 
-  getAllCliente():Observable<Array<Cliente>>{
+  getHttpAllCliente():Observable<Array<Cliente>>{
     return this.http.get(this.config.url + "Cliente").map((res:Array<Cliente>)=>res);    
   }
+
+  // getAllCliente(){
+  //   this.http.get<Cliente[]>(this.config.url + "Cliente").map((res:Array<Cliente>)=>{
+  //     return res
+  //   }
+  //   );    
+  // }
 
   saveCliente(_cliente: Cliente){
     return this.http.post(this.config.url+"Cliente?", _cliente, {responseType: 'text'});
@@ -41,4 +60,6 @@ export class ClienteProvider {
   deleteCliente(_cliente: Cliente){
     return this.http.delete(this.config.url+"Cliente/" + _cliente.codCliente);
   }
+
+
 }

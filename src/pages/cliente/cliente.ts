@@ -39,16 +39,24 @@ export class ClientePage implements OnInit, OnDestroy {
   }
 
   ionViewDidLoad() {
+    
+
     let load = this.loadingCtrl.create({ content: "Aguarde um momento..." });
     setTimeout(() => {
       load.dismiss();
     }, 8000);
     load.present();
-    this.clienteProvider.getAllCliente().subscribe(res => this.clientes = res, err => console.log(err), () => load.dismiss());
 
-    this.debounce.
-    pipe(debounceTime(500)).
-    subscribe(filter => this.nomeFilter = filter);
+    this.clienteProvider.getHttpAllCliente()
+                        .subscribe(res => {
+                          this.clienteProvider.setAllCliente(res);
+                          this.clientes = this.clienteProvider.getAllCliente();
+                        }, err => console.log(err), 
+                          () => load.dismiss());
+
+    this.debounce
+        .pipe(debounceTime(500))
+        .subscribe(filter => this.nomeFilter = filter);
 
   }
 
