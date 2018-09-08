@@ -61,12 +61,12 @@ export class ClientePage implements OnInit, OnDestroy {
   }
 
   EditarCliente(cliente) {
-    this.navCtrl.push(ClienteFormPage.name, { clienteSelecionado: cliente });
+    this.navCtrl.push('ClienteFormPage', { clienteSelecionado: cliente });
   }
 
   CadastrarCliente() {
     let cliente = new Cliente();
-    this.navCtrl.push(ClienteFormPage.name, { clienteSelecionado: cliente });
+    this.navCtrl.push('ClienteFormPage', { clienteSelecionado: cliente });
   }
 
   ngOnInit() {

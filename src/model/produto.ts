@@ -25,6 +25,7 @@ export class Produto{
     tribIcms: number;
     cst: number;
     ativo: boolean;
+    open: boolean = false;
 }
 
 export class Embalagem{

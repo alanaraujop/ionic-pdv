@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ProdutoPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
     <ion-navbar>
@@ -15,14 +9,34 @@
 
 <ion-content padding>
 
-    <ion-card *ngFor="let produto of produtos">
+    <ion-searchbar [(ngModel)]="produtoFilter" (keyup)="debounce.next($event.target.value)"></ion-searchbar>
+
+    <ion-card *ngFor="let produto of produtos | filter: produtoFilter | orderBy : 'nome' : 0 : 1">
         <ion-card-header>
             {{produto.nome}}
         </ion-card-header>
         <ion-card-content>
-            <ion-icon name="card"></ion-icon> {{produto.precoVenda | currency:'BRL'}}
-            <ion-icon name="cash" class="green"></ion-icon> {{produto.pesoL | currency:'BRL'}}
+            <ion-item>
+                <ion-icon name="card"></ion-icon>
+                <p>{{produto.precoVenda | currency:'BRL'}}</p>
+            </ion-item>
+            <ion-item>
+                <ion-icon name="cash" class="green"></ion-icon>
+                <p>{{produto.pesoL | currency:'BRL'}}</p>
+            </ion-item>
+
         </ion-card-content>
+        <ion-row class="detalhes" [ngClass]="{'active': produto.open}">
+            <ion-item>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste earum provident labore deleniti nobis eveniet omnis illum possimus optio. Quo eligendi fugit dolores nostrum quidem atque, vel ullam tempore deserunt.
+            </ion-item>
+        </ion-row>
+        <ion-row (click)="exibirDetalhes(produto)">
+            <ion-col center>
+                <ion-icon name="add"></ion-icon>
+            </ion-col>
+        </ion-row>
+
     </ion-card>
 
 </ion-content>

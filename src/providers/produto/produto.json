@@ -1,0 +1,50 @@
+{
+    "registro": 265,
+    "codProduto": "3017",
+    "nome": "OCRE",
+    "codCategoria": 6,
+    "codMarca": 10,
+    "imagem": "label16",
+    "tamanho": "",
+    "pecaCaixa": 0,
+    "m2Caixa": 0.00,
+    "precoVenda": 4.5,
+    "precoCompra": 0,
+    "quantEstoque": 0,
+    "estMinimo": 0,
+    "quantReserva": 0,
+    "ean": 0,
+    "codEmbalagem": 3,
+    "codUnidade": 3,
+    "pesoL": 4.000,
+    "pesoB": 0.000,
+    "icms": 0,
+    "pis": 0,
+    "tribIcms": 0,
+    "cst": 0,
+    "ativo": true,
+    "Embalagem": {
+        "registro": 265,
+        "codEmbalagem": 3,
+        "nome": "OCRE",
+        "ativo": true
+    },
+    "Categoria": {
+        "registro": 265,
+        "codCategoria": 6,
+        "nome": "OCRE",
+        "ativo": true
+    },
+    "Unidade": {
+        "registro": 265,
+        "codUnidade": 3,
+        "nome": "OCRE",
+        "ativo": true
+    },
+    "Marca": {
+        "registro": 265,
+        "codMarca": 10,
+        "nome": "OCRE",
+        "ativo": true
+    }
+}

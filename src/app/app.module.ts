@@ -2,27 +2,29 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule} from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
+import { MyApp } from './app.component';
+import { HomePage } from '../pages/home/home';
 import { PdvPage } from '../pages/pdv/pdv';
 import { ClientePage } from '../pages/cliente/cliente';
 import { LoginPage } from '../pages/login/login';
+import { ProdutoPage } from '../pages/produto/produto';
+
 import { DadosProvider } from '../providers/dados/dados';
 import { ClienteProvider } from '../providers/cliente/cliente';
 import { OrcamentoProvider } from '../providers/orcamento/orcamento';
-import { HttpClientModule } from '@angular/common/http';
-import { LoginProvider } from '../providers/login/login';
-import { IonicStorageModule } from '@ionic/storage';
 import { LoadingProvider } from '../providers/loading/loading';
+import { LoginProvider } from '../providers/login/login';
+import { ProdutoProvider } from '../providers/produto/produto';
+
+import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 import { PipesModule } from '../pipes/pipes.module';
 import { OrderModule } from 'ngx-order-pipe';
 import { LoginPageModule } from '../pages/login/login.module';
-import { ProdutoProvider } from '../providers/produto/produto';
-import { ProdutoPageModule } from '../pages/produto/produto.module';
+import { ClienteFormPageModule } from '../pages/cliente-form/cliente-form.module';
 // import { ComponentsModule } from '../components/components.module';
 
 
@@ -30,9 +32,10 @@ import { ProdutoPageModule } from '../pages/produto/produto.module';
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     PdvPage,
-    ClientePage ],
+    ClientePage,
+    ProdutoPage
+ ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -41,17 +44,17 @@ import { ProdutoPageModule } from '../pages/produto/produto.module';
     OrderModule,
     PipesModule,
     LoginPageModule,
-    ProdutoPageModule
+    ClienteFormPageModule
     // ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     ClientePage,
     PdvPage,
-    LoginPage
+    LoginPage,
+    ProdutoPage
     ],
   providers: [
     StatusBar,

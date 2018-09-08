@@ -4,7 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { PdvPage } from '../pages/pdv/pdv';
 import { ClientePage } from '../pages/cliente/cliente';
 import { LoginPage } from '../pages/login/login';
@@ -19,8 +18,8 @@ import { ProdutoPage } from '../pages/produto/produto';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // rootPage: any = HomePage;
-  rootPage: any = LoginPage;
+ // rootPage: any = HomePage;
+  rootPage: any = ProdutoPage;
 
   usuario: string;
 

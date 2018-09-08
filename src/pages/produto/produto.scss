@@ -1,11 +1,34 @@
 page-produto {
+    .active {
+        max-height: none !important;
+        transition: max-height 0.2s ease-out;
+    }
+    .detalhes {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
     ion-card-header {
         font-weight: bold;
     }
-    ion-icon {
-        margin: 0 5px 0 20px;
+    ion-icon,
+    p {
+        display: flex;
+        justify-content: center;
+        // margin: 0 5px 0 20px;
     }
     .green {
         color: rgb(38, 122, 27);
+    }
+    ion-card-content {
+        display: flex;
+        flex-direction: row;
+    }
+    ion-col {
+        //border-top: 1px solid black;
+        background-color: $gray;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
     }
 }

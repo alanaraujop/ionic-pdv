@@ -5,17 +5,20 @@
         <ion-icon name="menu"></ion-icon>
       </button>
         <ion-title>Clientes</ion-title>
-        <ion-icon name="add" (click)="CadastrarCliente()"></ion-icon>
+        <button ion-button clear icon-only (click)="CadastrarCliente()"><ion-icon name="add" ></ion-icon></button>
+
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-item>
+    <ion-searchbar [(ngModel)]="nomeFilter" (keyup)="debounce.next($event.target.value)"></ion-searchbar>
+
+    <!-- <ion-item>
         <ion-label floating>Buscar por Nome</ion-label>
         <ion-input type="text" [(ngModel)]="nomeFilter" name="nome" (keyup)="debounce.next($event.target.value)" uppercase></ion-input>
-    </ion-item>
+    </ion-item> -->
     <ion-item>
         <ion-label>Exibir Inativo</ion-label>
         <ion-checkbox [(ngModel)]="exibirInativo" color="blue" checked="true" (change)="filtrarInativo()"></ion-checkbox>
