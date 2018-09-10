@@ -5,6 +5,7 @@ import { PdvPage } from '../pdv/pdv';
 import { ClientePage } from '../cliente/cliente';
 import { LoginProvider } from '../../providers/login/login';
 import { LoginPage } from '../login/login';
+import { ProdutoPage } from '../produto/produto';
 
 @Component({
   selector: 'page-home',
@@ -16,6 +17,7 @@ export class HomePage {
   lista: any;
   private pdvPage = PdvPage;
   private clientePage = ClientePage;
+  private produtoPage = ProdutoPage;
 
   constructor(
     public login: LoginProvider, 

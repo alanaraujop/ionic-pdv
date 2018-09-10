@@ -33,13 +33,13 @@ export class ProdutoPage {
   }
 
   ionViewDidLoad(){
-    // this.produtoProvider.getHttpAllProduto()
-    //                     .subscribe(res=>{
-    //                       this.produtoProvider.setAllProduto(res);
-    //                       this.produtos = this.produtoProvider.getAllProduto();
-    //                     });
+    this.produtoProvider.getHttpAllProduto()
+                        .subscribe(res=>{
+                          this.produtoProvider.setAllProduto(res);
+                          this.produtos = this.produtoProvider.getAllProduto();
+                        });
 
-    this.produtos = this.produtoProvider.getAllProduto();
+    // this.produtos = this.produtoProvider.getAllProduto();
 
     this.debounce
     .pipe(debounceTime(500))

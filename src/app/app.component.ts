@@ -18,8 +18,8 @@ import { ProdutoPage } from '../pages/produto/produto';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
- // rootPage: any = HomePage;
-  rootPage: any = ProdutoPage;
+  rootPage: any = LoginPage;
+ // rootPage: any = ProdutoPage;
 
   usuario: string;
 

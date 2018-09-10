@@ -16,23 +16,44 @@
             {{produto.nome}}
         </ion-card-header>
         <ion-card-content>
-            <ion-item>
-                <ion-icon name="card"></ion-icon>
-                <p>{{produto.precoVenda | currency:'BRL'}}</p>
-            </ion-item>
-            <ion-item>
-                <ion-icon name="cash" class="green"></ion-icon>
-                <p>{{produto.pesoL | currency:'BRL'}}</p>
-            </ion-item>
+            <ion-col col-6>
+                <ion-item>
 
+                    <p>
+                        <ion-icon name="card"></ion-icon> {{produto.precoVenda | currency:'BRL'}}</p>
+                </ion-item>
+                <ion-item>
+
+                    <p>
+                        <ion-icon name="cash" class="green"></ion-icon> {{produto.pesoL | currency:'BRL'}}</p>
+                </ion-item>
+            </ion-col>
+            <ion-col col-6>
+                <ion-item>
+
+                    <p>
+                        <ion-icon name="cube"></ion-icon>Estoque: {{produto.quantEstoque}}</p>
+                </ion-item>
+                <ion-item>
+
+                    <p>
+                        <ion-icon name="cube" class="yellow"></ion-icon>Reservado: {{produto.quantReserva}}</p>
+                </ion-item>
+            </ion-col>
         </ion-card-content>
         <ion-row class="detalhes" [ngClass]="{'active': produto.open}">
             <ion-item>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste earum provident labore deleniti nobis eveniet omnis illum possimus optio. Quo eligendi fugit dolores nostrum quidem atque, vel ullam tempore deserunt.
+                <p>TAMANHO: {{produto.tamanho}}</p>
+            </ion-item>
+            <ion-item>
+                <p>QUANT. PEÇAS NA CAIXA: {{produto.pecaCaixa}}</p>
+            </ion-item>
+            <ion-item>
+                <p>M² NA CAIXA: {{produto.m2Caixa}}</p>
             </ion-item>
         </ion-row>
         <ion-row (click)="exibirDetalhes(produto)">
-            <ion-col center>
+            <ion-col class="btn-detalhes" center>
                 <ion-icon name="add"></ion-icon>
             </ion-col>
         </ion-row>
