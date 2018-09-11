@@ -7,16 +7,16 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
     <ion-searchbar [(ngModel)]="produtoFilter" (keyup)="debounce.next($event.target.value)"></ion-searchbar>
 
-    <ion-card *ngFor="let produto of produtos | filter: produtoFilter | orderBy : 'nome' : 0 : 1">
+    <ion-card *ngFor="let produto of produtos | filter: searchProduto | orderBy : 'nome' : 0 : 1">
         <ion-card-header>
             {{produto.nome}}
         </ion-card-header>
         <ion-card-content>
-            <ion-col col-6>
+            <ion-col>
                 <ion-item>
 
                     <p>
@@ -28,7 +28,7 @@
                         <ion-icon name="cash" class="green"></ion-icon> {{produto.pesoL | currency:'BRL'}}</p>
                 </ion-item>
             </ion-col>
-            <ion-col col-6>
+            <ion-col>
                 <ion-item>
 
                     <p>
@@ -59,5 +59,9 @@
         </ion-row>
 
     </ion-card>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 </ion-content>

@@ -30,6 +30,7 @@ page-produto {
     ion-card-content {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
     }
     .btn-detalhes {
         //border-top: 1px solid black;

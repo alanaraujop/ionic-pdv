@@ -19,10 +19,12 @@ import { OrderPipe } from 'ngx-order-pipe';
 })
 export class ProdutoPage {
 
-  public produtos: Array<Produto>;
-  public produtoFilter: string = "";
+  private produtos: Array<Produto> = [];
+  private produtosFull: Array<Produto> = [];
+  private produtoFilter: string = "";
+  private searchProduto: string = "";
 
-  public debounce = new Subject<string>();
+  private debounce = new Subject<string>();
 
   constructor(
     public navCtrl: NavController, 
@@ -36,14 +38,17 @@ export class ProdutoPage {
     this.produtoProvider.getHttpAllProduto()
                         .subscribe(res=>{
                           this.produtoProvider.setAllProduto(res);
-                          this.produtos = this.produtoProvider.getAllProduto();
+                          this.produtosFull = this.produtoProvider.getAllProduto();
+                          for (let i = 0; i < 30; i++) {
+                            this.produtos.push( this.produtosFull[this.produtos.length + i]);
+                          }
                         });
 
     // this.produtos = this.produtoProvider.getAllProduto();
 
     this.debounce
-    .pipe(debounceTime(500))
-    .subscribe(filter => this.produtoFilter = filter);
+    .pipe(debounceTime(600))
+    .subscribe(filter => this.searchProduto = filter);
   }
 
   ngOnDestroy(): void {
@@ -58,5 +63,19 @@ export class ProdutoPage {
       produto.open = false;
     })
   }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      for (let i = 0; i < 30; i++) {
+        this.produtos.push( this.produtosFull[this.produtos.length + i]);
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 100);
+  }
+
 
 }

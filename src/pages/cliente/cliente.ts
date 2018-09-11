@@ -21,11 +21,12 @@ import { AlertController } from 'ionic-angular';
 })
 export class ClientePage implements OnInit, OnDestroy {
 
-  public cliente = new Cliente();
-  public clientes = new Array<Cliente>();
-  public nomeFilter: string = "";
+  private cliente = new Cliente();
+  private clientes = new Array<Cliente>();
+  private nomeFilter: string = "";
+  private searchNome: string = "";
 
-  public debounce = new Subject<string>();
+  private debounce = new Subject<string>();
 
 
   constructor(
@@ -56,7 +57,7 @@ export class ClientePage implements OnInit, OnDestroy {
 
     this.debounce
         .pipe(debounceTime(500))
-        .subscribe(filter => this.nomeFilter = filter);
+        .subscribe(filter => this.searchNome = filter);
 
   }
 
