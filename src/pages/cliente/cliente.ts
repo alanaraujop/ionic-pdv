@@ -51,7 +51,7 @@ export class ClientePage implements OnInit, OnDestroy {
     this.clienteProvider.getHttpAllCliente()
                         .subscribe(res => {
                           this.clienteProvider.setAllCliente(res);
-                          this.clientes = this.clienteProvider.getAllCliente();
+                          this.clientes = this.orderPipe.transform(this.clienteProvider.getAllCliente(),'nome');
                         }, err => console.log(err), 
                           () => load.dismiss());
 

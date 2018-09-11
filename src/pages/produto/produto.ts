@@ -38,7 +38,7 @@ export class ProdutoPage {
     this.produtoProvider.getHttpAllProduto()
                         .subscribe(res=>{
                           this.produtoProvider.setAllProduto(res);
-                          this.produtosFull = this.produtoProvider.getAllProduto();
+                          this.produtosFull = this.orderPipe.transform(this.produtoProvider.getAllProduto(), 'nome');
                           for (let i = 0; i < 30; i++) {
                             this.produtos.push( this.produtosFull[this.produtos.length + i]);
                           }
@@ -69,10 +69,10 @@ export class ProdutoPage {
 
     setTimeout(() => {
       for (let i = 0; i < 30; i++) {
-        this.produtos.push( this.produtosFull[this.produtos.length + i]);
+        this.produtos.push( this.produtosFull[this.produtos.length - 1 + i]);
       }
 
-      console.log('Async operation has ended');
+      console.log(this.produtos);
       infiniteScroll.complete();
     }, 100);
   }

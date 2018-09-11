@@ -11,7 +11,8 @@
 
     <ion-searchbar [(ngModel)]="produtoFilter" (keyup)="debounce.next($event.target.value)"></ion-searchbar>
 
-    <ion-card *ngFor="let produto of produtos | filter: searchProduto | orderBy : 'nome' : 0 : 1">
+    <!-- <ion-card *ngFor="let produto of produtos | filter: searchProduto | orderBy : 'nome' : 0 : 1"> -->
+    <ion-card *ngFor="let produto of produtos | filter: searchProduto">
         <ion-card-header>
             {{produto.nome}}
         </ion-card-header>
