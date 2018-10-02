@@ -1,4 +1,4 @@
-export class Orcamento{
+export class Orcamento {
     registro: number;
     numOrcamento: number;
     dtEmissao: string;
@@ -14,7 +14,7 @@ export class Orcamento{
     itens: Array<Item>;
 }
 
-export class Cliente{
+export class Cliente {
     registro: number = -1;
     codCliente: number = -1;
     nome: string;
@@ -38,7 +38,7 @@ export class Cliente{
     ativo: boolean = true;
 }
 
-class CondicaoPagamento{
+class CondicaoPagamento {
     codCondicaoPg: number;
     nome: string;
     prazo: number;
@@ -46,13 +46,19 @@ class CondicaoPagamento{
     formaPg: string;
 }
 
-export class Funcionario{
+export class FormaPagamento {
+    codFormaPg: number;
+    nome: string;
+    ativo: boolean;
+}
+
+export class Funcionario {
     codFuncionario: number;
     nome: string = "";
     senha: string = "";
 }
 
-class Item{
+class Item {
     registro: number;
     numOrcamento: number;
     numPedido: number;

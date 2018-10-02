@@ -25,6 +25,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { OrderModule } from 'ngx-order-pipe';
 import { LoginPageModule } from '../pages/login/login.module';
 import { ClienteFormPageModule } from '../pages/cliente-form/cliente-form.module';
+import { PagamentoProvider } from '../providers/pagamento/pagamento';
 // import { ComponentsModule } from '../components/components.module';
 
 
@@ -65,7 +66,8 @@ import { ClienteFormPageModule } from '../pages/cliente-form/cliente-form.module
     OrcamentoProvider,
     LoginProvider,
     LoadingProvider,
-    ProdutoProvider
+    ProdutoProvider,
+    PagamentoProvider
   ]
 })
 export class AppModule {}

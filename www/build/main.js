@@ -6,6 +6,7 @@ webpackJsonp([0],{
 "use strict";
 /* unused harmony export Orcamento */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Cliente; });
+/* unused harmony export FormaPagamento */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Funcionario; });
 var Orcamento = /** @class */ (function () {
     function Orcamento() {
@@ -27,6 +28,12 @@ var CondicaoPagamento = /** @class */ (function () {
     }
     return CondicaoPagamento;
 }());
+var FormaPagamento = /** @class */ (function () {
+    function FormaPagamento() {
+    }
+    return FormaPagamento;
+}());
+
 var Funcionario = /** @class */ (function () {
     function Funcionario() {
         this.nome = "";
@@ -49,13 +56,13 @@ var Item = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClienteProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__assets_config__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__assets_config__ = __webpack_require__(52);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -263,6 +270,7 @@ var HomePage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PdvPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_pagamento_pagamento__ = __webpack_require__(198);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -274,22 +282,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 // @IonicPage()
 var PdvPage = /** @class */ (function () {
-    function PdvPage(navCtrl, navParams) {
+    function PdvPage(navCtrl, loadingCtrl, navParams, pagamentoProvider) {
         this.navCtrl = navCtrl;
+        this.loadingCtrl = loadingCtrl;
         this.navParams = navParams;
+        this.pagamentoProvider = pagamentoProvider;
     }
     PdvPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad PdvPage');
+        var _this = this;
+        var load = this.loadingCtrl.create({ content: "Aguarde um momento..." });
+        setTimeout(function () {
+            load.dismiss();
+        }, 20000);
+        load.present();
+        this.pagamentoProvider.getHttpPagamentos().subscribe(function (res) {
+            _this.pagamentoProvider.setPagamentos(res.formaPagamento);
+            _this.formasPagamento = _this.pagamentoProvider.getAllFormasPagamento();
+            console.log(res.formaPagamento);
+        }, function (err) { return console.log(err); }, function () { return load.dismiss(); });
     };
     PdvPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-pdv',template:/*ion-inline-start:"C:\Git\ionic-pdv\src\pages\pdv\pdv.html"*/'<!--\n  Generated template for the PdvPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n          <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>PDV</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>'/*ion-inline-end:"C:\Git\ionic-pdv\src\pages\pdv\pdv.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_pagamento_pagamento__["a" /* PagamentoProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_pagamento_pagamento__["a" /* PagamentoProvider */]) === "function" && _d || Object])
     ], PdvPage);
     return PdvPage;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=pdv.js.map
@@ -308,7 +330,7 @@ var PdvPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_order_pipe__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Subject__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Subject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Operators__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Operators__ = __webpack_require__(199);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Operators__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -348,7 +370,7 @@ var ClientePage = /** @class */ (function () {
         var load = this.loadingCtrl.create({ content: "Aguarde um momento..." });
         setTimeout(function () {
             load.dismiss();
-        }, 8000);
+        }, 20000);
         load.present();
         this.clienteProvider.getHttpAllCliente()
             .subscribe(function (res) {
@@ -375,10 +397,14 @@ var ClientePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-cliente',template:/*ion-inline-start:"C:\Git\ionic-pdv\src\pages\cliente\cliente.html"*/'<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n        <ion-title>Clientes</ion-title>\n        <button ion-button clear icon-only (click)="CadastrarCliente()"><ion-icon name="add" ></ion-icon></button>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-searchbar [(ngModel)]="nomeFilter" (keyup)="debounce.next($event.target.value)"></ion-searchbar>\n\n    <!-- <ion-item>\n        <ion-label floating>Buscar por Nome</ion-label>\n        <ion-input type="text" [(ngModel)]="nomeFilter" name="nome" (keyup)="debounce.next($event.target.value)" uppercase></ion-input>\n    </ion-item> -->\n    <ion-item>\n        <ion-label>Exibir Inativo</ion-label>\n        <ion-checkbox [(ngModel)]="exibirInativo" color="blue" checked="true" (change)="filtrarInativo()"></ion-checkbox>\n    </ion-item>\n    <!-- <ion-list *ngFor="let cliente of clientes | filter: searchNome | orderBy : \'nome\' : 0 : 1" (click)="EditarCliente(cliente)"> -->\n    <ion-list *ngFor="let cliente of clientes | filter: searchNome" (click)="EditarCliente(cliente)">\n        <button ion-item *ngIf="cliente.ativo || exibirInativo ">\n    {{ cliente.nome | uppercase}}\n  </button>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"C:\Git\ionic-pdv\src\pages\cliente\cliente.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__providers_cliente_cliente__["a" /* ClienteProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_cliente_cliente__["a" /* ClienteProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4_ngx_order_pipe__["b" /* OrderPipe */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_ngx_order_pipe__["b" /* OrderPipe */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _f || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_cliente_cliente__["a" /* ClienteProvider */],
+            __WEBPACK_IMPORTED_MODULE_4_ngx_order_pipe__["b" /* OrderPipe */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], ClientePage);
     return ClientePage;
-    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=cliente.js.map
@@ -392,10 +418,10 @@ var ClientePage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProdutoPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_produto_produto__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_produto_produto__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Operators__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Operators__ = __webpack_require__(199);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Operators__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ngx_order_pipe__ = __webpack_require__(112);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -441,39 +467,67 @@ var ProdutoPage = /** @class */ (function () {
         // this.produtos = this.produtoProvider.getAllProduto();
         this.debounce
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_Operators__["debounceTime"])(600))
-            .subscribe(function (filter) { return _this.searchProduto = filter; });
+            .subscribe(function (filter) {
+            _this.produtos = [];
+            var aux = _this.filtrar(_this.produtosFull, filter);
+            for (var i = 0; i < 30 && aux[i] !== undefined; i++) {
+                _this.produtos.push(aux[i]);
+            }
+            console.log(_this.produtos);
+        });
     };
     ProdutoPage.prototype.ngOnDestroy = function () {
         this.debounce.unsubscribe();
     };
     ProdutoPage.prototype.exibirDetalhes = function (_produto) {
-        this.produtos.forEach(function (produto) {
-            if (_produto.codProduto == produto.codProduto) {
-                produto.open = !produto.open;
-            }
-            else
-                produto.open = false;
-        });
+        if (this.produtos) {
+            this.produtos.forEach(function (item) {
+                if (_produto.codProduto == item.codProduto) {
+                    item.open = !item.open;
+                }
+                else
+                    item.open = false;
+            });
+        }
     };
     ProdutoPage.prototype.doInfinite = function (infiniteScroll) {
-        var _this = this;
-        console.log('Begin async operation');
-        setTimeout(function () {
-            for (var i = 0; i < 30; i++) {
-                _this.produtos.push(_this.produtosFull[_this.produtos.length - 1 + i]);
-            }
-            console.log(_this.produtos);
-            infiniteScroll.complete();
-        }, 100);
+        var aux = this.filtrar(this.produtosFull, this.produtoFilter);
+        for (var i = 0; i < 30 && aux[this.produtos.length + i] !== undefined; i++) {
+            this.produtos.push(aux[this.produtos.length + i]);
+        }
+        // for (let i = 0; i < 30; i++) {
+        //   this.produtos.push( this.produtosFull[this.produtos.length + i]);
+        // }
+        console.log(this.produtos);
+        infiniteScroll.complete();
+    };
+    ProdutoPage.prototype.filtrar = function (items, searchText) {
+        if (!items)
+            return [];
+        if (!searchText) {
+            // let aux = [];
+            // for (let i = 0; i < 30 ; i++) {
+            //   aux.push( this.produtosFull[i]);
+            // }
+            // return aux;
+            return items;
+        }
+        searchText = searchText.toString().toUpperCase();
+        return items.filter(function (it) {
+            var nome = it.nome.toString().toUpperCase();
+            return nome.includes(searchText);
+        });
     };
     ProdutoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-produto',template:/*ion-inline-start:"C:\Git\ionic-pdv\src\pages\produto\produto.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-title>Produtos</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n    <ion-searchbar [(ngModel)]="produtoFilter" (keyup)="debounce.next($event.target.value)"></ion-searchbar>\n\n    <!-- <ion-card *ngFor="let produto of produtos | filter: searchProduto | orderBy : \'nome\' : 0 : 1"> -->\n    <ion-card *ngFor="let produto of produtos | filter: searchProduto">\n        <ion-card-header>\n            {{produto.nome}}\n        </ion-card-header>\n        <ion-card-content>\n            <ion-col>\n                <ion-item>\n\n                    <p>\n                        <ion-icon name="card"></ion-icon> {{produto.precoVenda | currency:\'BRL\'}}</p>\n                </ion-item>\n                <ion-item>\n\n                    <p>\n                        <ion-icon name="cash" class="green"></ion-icon> {{produto.pesoL | currency:\'BRL\'}}</p>\n                </ion-item>\n            </ion-col>\n            <ion-col>\n                <ion-item>\n\n                    <p>\n                        <ion-icon name="cube"></ion-icon>Estoque: {{produto.quantEstoque}}</p>\n                </ion-item>\n                <ion-item>\n\n                    <p>\n                        <ion-icon name="cube" class="yellow"></ion-icon>Reservado: {{produto.quantReserva}}</p>\n                </ion-item>\n            </ion-col>\n        </ion-card-content>\n        <ion-row class="detalhes" [ngClass]="{\'active\': produto.open}">\n            <ion-item>\n                <p>TAMANHO: {{produto.tamanho}}</p>\n            </ion-item>\n            <ion-item>\n                <p>QUANT. PEÇAS NA CAIXA: {{produto.pecaCaixa}}</p>\n            </ion-item>\n            <ion-item>\n                <p>M² NA CAIXA: {{produto.m2Caixa}}</p>\n            </ion-item>\n        </ion-row>\n        <ion-row (click)="exibirDetalhes(produto)">\n            <ion-col class="btn-detalhes" center>\n                <ion-icon name="add"></ion-icon>\n            </ion-col>\n        </ion-row>\n\n    </ion-card>\n\n    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n        <ion-infinite-scroll-content></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n\n</ion-content>'/*ion-inline-end:"C:\Git\ionic-pdv\src\pages\produto\produto.html"*/,
+            selector: 'page-produto',template:/*ion-inline-start:"C:\Git\ionic-pdv\src\pages\produto\produto.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-title>Produtos</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n    <ion-searchbar [(ngModel)]="produtoFilter" (keyup)="debounce.next($event.target.value)"></ion-searchbar>\n\n    <!-- <ion-card *ngFor="let produto of produtos | filter: searchProduto | orderBy : \'nome\' : 0 : 1"> -->\n    <ion-card *ngFor="let produto of produtos">\n        <ion-card-header>\n            {{produto.nome}}\n        </ion-card-header>\n        <ion-card-content>\n            <ion-col>\n                <ion-item>\n\n                    <p>\n                        <ion-icon name="card"></ion-icon> {{produto.precoVenda | currency:\'BRL\'}}</p>\n                </ion-item>\n                <ion-item>\n\n                    <p>\n                        <ion-icon name="cash" class="green"></ion-icon> {{produto.pesoL | currency:\'BRL\'}}</p>\n                </ion-item>\n            </ion-col>\n            <ion-col>\n                <ion-item>\n\n                    <p>\n                        <ion-icon name="cube"></ion-icon>Estoque: {{produto.quantEstoque}}</p>\n                </ion-item>\n                <ion-item>\n\n                    <p>\n                        <ion-icon name="cube" class="yellow"></ion-icon>Reservado: {{produto.quantReserva}}</p>\n                </ion-item>\n            </ion-col>\n        </ion-card-content>\n        <ion-row class="detalhes" [ngClass]="{\'active\': produto.open}">\n            <ion-item>\n                <p>TAMANHO: {{produto.tamanho}}</p>\n            </ion-item>\n            <ion-item>\n                <p>QUANT. PEÇAS NA CAIXA: {{produto.pecaCaixa}}</p>\n            </ion-item>\n            <ion-item>\n                <p>M² NA CAIXA: {{produto.m2Caixa}}</p>\n            </ion-item>\n        </ion-row>\n        <ion-row (click)="exibirDetalhes(produto)">\n            <ion-col class="btn-detalhes" center>\n                <ion-icon name="add"></ion-icon>\n            </ion-col>\n        </ion-row>\n\n    </ion-card>\n\n    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n        <ion-infinite-scroll-content></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n\n</ion-content>'/*ion-inline-end:"C:\Git\ionic-pdv\src\pages\produto\produto.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_produto_produto__["a" /* ProdutoProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_produto_produto__["a" /* ProdutoProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5_ngx_order_pipe__["b" /* OrderPipe */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_ngx_order_pipe__["b" /* OrderPipe */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_produto_produto__["a" /* ProdutoProvider */],
+            __WEBPACK_IMPORTED_MODULE_5_ngx_order_pipe__["b" /* OrderPipe */]])
     ], ProdutoPage);
     return ProdutoPage;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=produto.js.map
@@ -532,7 +586,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClienteFormPageModule", function() { return ClienteFormPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cliente_form__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cliente_form__ = __webpack_require__(290);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -611,13 +665,13 @@ var LoginPageModule = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DadosProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__assets_config__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__assets_config__ = __webpack_require__(52);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -659,15 +713,68 @@ var DadosProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 215:
+/***/ 198:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PagamentoProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__assets_config__ = __webpack_require__(52);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+/*
+  Generated class for the PagamentoProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+var PagamentoProvider = /** @class */ (function () {
+    function PagamentoProvider(http) {
+        this.http = http;
+        this.config = new __WEBPACK_IMPORTED_MODULE_2__assets_config__["a" /* Config */];
+        console.log('Hello PagamentoProvider Provider');
+    }
+    PagamentoProvider.prototype.getHttpPagamentos = function () {
+        return this.http.get(this.config.url + "TabelasBasicas").map(function (res) { return res; });
+    };
+    PagamentoProvider.prototype.setPagamentos = function (_pagamentos) {
+        this.formasPagamento = _pagamentos;
+    };
+    PagamentoProvider.prototype.getAllFormasPagamento = function () {
+        return this.formasPagamento;
+    };
+    PagamentoProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
+    ], PagamentoProvider);
+    return PagamentoProvider;
+    var _a;
+}());
+
+//# sourceMappingURL=pagamento.js.map
+
+/***/ }),
+
+/***/ 216:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProdutoProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_produto__ = __webpack_require__(392);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__assets_config__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_produto__ = __webpack_require__(393);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__assets_config__ = __webpack_require__(52);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -719,13 +826,13 @@ var ProdutoProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 259:
+/***/ 260:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(268);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -733,17 +840,17 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 267:
+/***/ 268:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__ = __webpack_require__(255);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(258);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(259);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(419);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_pdv_pdv__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_cliente_cliente__ = __webpack_require__(111);
@@ -751,22 +858,24 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_produto_produto__ = __webpack_require__(117);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_dados_dados__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_cliente_cliente__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__providers_orcamento_orcamento__ = __webpack_require__(419);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_loading_loading__ = __webpack_require__(420);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__providers_orcamento_orcamento__ = __webpack_require__(420);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_loading_loading__ = __webpack_require__(421);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_login_login__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_produto_produto__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__angular_common_http__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_produto_produto__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__angular_common_http__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_storage__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pipes_pipes_module__ = __webpack_require__(421);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pipes_pipes_module__ = __webpack_require__(422);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_ngx_order_pipe__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_login_login_module__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_cliente_form_cliente_form_module__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_pagamento_pagamento__ = __webpack_require__(198);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -837,7 +946,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_13__providers_orcamento_orcamento__["a" /* OrcamentoProvider */],
                 __WEBPACK_IMPORTED_MODULE_15__providers_login_login__["a" /* LoginProvider */],
                 __WEBPACK_IMPORTED_MODULE_14__providers_loading_loading__["a" /* LoadingProvider */],
-                __WEBPACK_IMPORTED_MODULE_16__providers_produto_produto__["a" /* ProdutoProvider */]
+                __WEBPACK_IMPORTED_MODULE_16__providers_produto_produto__["a" /* ProdutoProvider */],
+                __WEBPACK_IMPORTED_MODULE_23__providers_pagamento_pagamento__["a" /* PagamentoProvider */]
             ]
         })
     ], AppModule);
@@ -848,7 +958,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 289:
+/***/ 290:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -941,7 +1051,7 @@ var ClienteFormPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 392:
+/***/ 393:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -986,15 +1096,15 @@ var Marca = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 418:
+/***/ 419:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(255);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(258);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(259);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_pdv_pdv__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_cliente_cliente__ = __webpack_require__(111);
@@ -1091,7 +1201,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 419:
+/***/ 420:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1129,12 +1239,12 @@ var OrcamentoProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 420:
+/***/ 421:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoadingProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(19);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1174,14 +1284,14 @@ var LoadingProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 421:
+/***/ 422:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PipesModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__filter_filter__ = __webpack_require__(422);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__upper_upper__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__filter_filter__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__upper_upper__ = __webpack_require__(424);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1191,6 +1301,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+// import { OrderPipe } from 'ngx-order-pipe';
 var PipesModule = /** @class */ (function () {
     function PipesModule() {
     }
@@ -1208,7 +1319,7 @@ var PipesModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 422:
+/***/ 423:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1247,7 +1358,7 @@ var FilterPipe = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 423:
+/***/ 424:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1279,7 +1390,7 @@ var UpperPipe = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 60:
+/***/ 52:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1300,13 +1411,13 @@ var Config = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__assets_config__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__assets_config__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(65);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1352,5 +1463,5 @@ var LoginProvider = /** @class */ (function () {
 
 /***/ })
 
-},[259]);
+},[260]);
 //# sourceMappingURL=main.js.map

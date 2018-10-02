@@ -45,7 +45,7 @@ export class ClientePage implements OnInit, OnDestroy {
     let load = this.loadingCtrl.create({ content: "Aguarde um momento..." });
     setTimeout(() => {
       load.dismiss();
-    }, 8000);
+    }, 20000);
     load.present();
 
     this.clienteProvider.getHttpAllCliente()
@@ -53,7 +53,7 @@ export class ClientePage implements OnInit, OnDestroy {
                           this.clienteProvider.setAllCliente(res);
                           this.clientes = this.orderPipe.transform(this.clienteProvider.getAllCliente(),'nome');
                         }, err => console.log(err), 
-                          () => load.dismiss());
+                          () => load.dismiss());                          
 
     this.debounce
         .pipe(debounceTime(500))

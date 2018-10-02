@@ -1,0 +1,72 @@
+{
+    "condicaoPagamento": [{
+            "CodCondicaoPg": 0,
+            "CodFormaPg": 0,
+            "Nome": "PADRAO",
+            "Prazo": 0,
+            "Ativo": true,
+            "FormaPagamento": {
+                "CodFormaPg": 0,
+                "Nome": "PADRÃƒO",
+                "Ativo": true
+            }
+        },
+        {
+            "CodCondicaoPg": 1,
+            "CodFormaPg": 3,
+            "Nome": "PADRAO",
+            "Prazo": 0,
+            "Ativo": true,
+            "FormaPagamento": {
+                "CodFormaPg": 3,
+                "Nome": "DINHEIRO",
+                "Ativo": true
+            }
+        },
+        {
+            "CodCondicaoPg": 2,
+            "CodFormaPg": 1,
+            "Nome": "PADRAO",
+            "Prazo": 0,
+            "Ativo": true,
+            "FormaPagamento": {
+                "CodFormaPg": 1,
+                "Nome": "CREDITO",
+                "Ativo": true
+            }
+        },
+        {
+            "CodCondicaoPg": 3,
+            "CodFormaPg": 2,
+            "Nome": "PADRAO",
+            "Prazo": 0,
+            "Ativo": true,
+            "FormaPagamento": {
+                "CodFormaPg": 2,
+                "Nome": "DEBITO",
+                "Ativo": true
+            }
+        }
+    ],
+    "formaPagamento": [{
+            "CodFormaPg": 0,
+            "Nome": "PADRÃƒO",
+            "Ativo": true
+        },
+        {
+            "CodFormaPg": 1,
+            "Nome": "CREDITO",
+            "Ativo": true
+        },
+        {
+            "CodFormaPg": 2,
+            "Nome": "DEBITO",
+            "Ativo": true
+        },
+        {
+            "CodFormaPg": 3,
+            "Nome": "DINHEIRO",
+            "Ativo": true
+        }
+    ]
+}

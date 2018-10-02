@@ -39,7 +39,7 @@ export class ProdutoPage {
                         .subscribe(res=>{
                           this.produtoProvider.setAllProduto(res);
                           this.produtosFull = this.orderPipe.transform(this.produtoProvider.getAllProduto(), 'nome');
-                          for (let i = 0; i < 30; i++) {
+                          for (let i = 0; i < 30 ; i++) {
                             this.produtos.push( this.produtosFull[this.produtos.length + i]);
                           }
                         });
@@ -48,7 +48,17 @@ export class ProdutoPage {
 
     this.debounce
     .pipe(debounceTime(600))
-    .subscribe(filter => this.searchProduto = filter);
+    .subscribe(filter => {
+     this.produtos = [];
+    
+     let aux = this.filtrar(this.produtosFull, filter);
+      for (let i = 0; i < 30 && aux[i]!==undefined ; i++) {
+        
+        this.produtos.push(aux[i]);
+      }
+    console.log(this.produtos);
+
+    });
   }
 
   ngOnDestroy(): void {
@@ -56,26 +66,50 @@ export class ProdutoPage {
   }
 
   exibirDetalhes(_produto: Produto){
-    this.produtos.forEach(produto=>{
-      if(_produto.codProduto == produto.codProduto){
-        produto.open = !produto.open;
+    if(this.produtos){
+    this.produtos.forEach(item=>{
+      if(_produto.codProduto == item.codProduto){
+        item.open = !item.open;
       } else 
-      produto.open = false;
+      item.open = false;
     })
+  }
   }
 
   doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      for (let i = 0; i < 30; i++) {
-        this.produtos.push( this.produtosFull[this.produtos.length - 1 + i]);
+   
+      let aux = this.filtrar(this.produtosFull, this.produtoFilter);
+      
+      for (let i = 0; i < 30 && aux[this.produtos.length + i]!==undefined ; i++) {        
+        this.produtos.push(aux[this.produtos.length + i]);
       }
+
+      // for (let i = 0; i < 30; i++) {
+      //   this.produtos.push( this.produtosFull[this.produtos.length + i]);
+      // }
 
       console.log(this.produtos);
       infiniteScroll.complete();
-    }, 100);
+    
   }
 
+  filtrar(items: any[], searchText: string): any[] {
+    if(!items) return [];
+    if(!searchText){
+      // let aux = [];
+      // for (let i = 0; i < 30 ; i++) {
+      //   aux.push( this.produtosFull[i]);
+      // }
+      // return aux;
+      return items;
+    } 
+
+    searchText = searchText.toString().toUpperCase();
+    return items.filter( it => {
+      let nome = it.nome.toString().toUpperCase();
+      return nome.includes(searchText);
+    });
+
+   }
 
 }
