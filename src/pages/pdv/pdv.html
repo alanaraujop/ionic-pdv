@@ -17,5 +17,13 @@
 
 
 <ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label>Forma de pagamento</ion-label>
+            <ion-select [(ngModel)]="orcamento.condPagamento">
+                <ion-option *ngFor="let formaPg of formasPagamento" value="{{formaPg.CodFormaPg}}">{{formaPg.Nome}}</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
 
 </ion-content>

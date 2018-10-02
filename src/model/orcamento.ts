@@ -9,7 +9,8 @@ export class Orcamento {
     valorDesconto: number;
     valor: number;
     cliente: Cliente;
-    condPagamento: CondicaoPagamento;
+    // condPagamento: CondicaoPagamento;
+    condPagamento: number = 0;
     funcionario: Funcionario;
     itens: Array<Item>;
 }
@@ -42,7 +43,7 @@ class CondicaoPagamento {
     codCondicaoPg: number;
     nome: string;
     prazo: number;
-    codFarmaPg: number;
+    codFormaPg: number;
     formaPg: string;
 }
 

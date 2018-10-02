@@ -4,12 +4,14 @@ webpackJsonp([0],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export Orcamento */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return Orcamento; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Cliente; });
 /* unused harmony export FormaPagamento */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Funcionario; });
 var Orcamento = /** @class */ (function () {
     function Orcamento() {
+        // condPagamento: CondicaoPagamento;
+        this.condPagamento = 0;
     }
     return Orcamento;
 }());
@@ -271,6 +273,7 @@ var HomePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_pagamento_pagamento__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_orcamento__ = __webpack_require__(102);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -283,6 +286,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 // @IonicPage()
 var PdvPage = /** @class */ (function () {
     function PdvPage(navCtrl, loadingCtrl, navParams, pagamentoProvider) {
@@ -290,9 +294,11 @@ var PdvPage = /** @class */ (function () {
         this.loadingCtrl = loadingCtrl;
         this.navParams = navParams;
         this.pagamentoProvider = pagamentoProvider;
+        this.orcamento = new __WEBPACK_IMPORTED_MODULE_3__model_orcamento__["c" /* Orcamento */]();
     }
     PdvPage.prototype.ionViewDidLoad = function () {
         var _this = this;
+        console.log(this.orcamento);
         var load = this.loadingCtrl.create({ content: "Aguarde um momento..." });
         setTimeout(function () {
             load.dismiss();
@@ -301,12 +307,11 @@ var PdvPage = /** @class */ (function () {
         this.pagamentoProvider.getHttpPagamentos().subscribe(function (res) {
             _this.pagamentoProvider.setPagamentos(res.formaPagamento);
             _this.formasPagamento = _this.pagamentoProvider.getAllFormasPagamento();
-            console.log(res.formaPagamento);
         }, function (err) { return console.log(err); }, function () { return load.dismiss(); });
     };
     PdvPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-pdv',template:/*ion-inline-start:"C:\Git\ionic-pdv\src\pages\pdv\pdv.html"*/'<!--\n  Generated template for the PdvPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n          <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>PDV</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>'/*ion-inline-end:"C:\Git\ionic-pdv\src\pages\pdv\pdv.html"*/,
+            selector: 'page-pdv',template:/*ion-inline-start:"C:\Git\ionic-pdv\src\pages\pdv\pdv.html"*/'<!--\n  Generated template for the PdvPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n          <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>PDV</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-list>\n        <ion-item>\n            <ion-label>Forma de pagamento</ion-label>\n            <ion-select [(ngModel)]="orcamento.condPagamento">\n                <ion-option *ngFor="let formaPg of formasPagamento" value="{{formaPg.CodFormaPg}}">{{formaPg.Nome}}</ion-option>\n            </ion-select>\n        </ion-item>\n    </ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\Git\ionic-pdv\src\pages\pdv\pdv.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_pagamento_pagamento__["a" /* PagamentoProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_pagamento_pagamento__["a" /* PagamentoProvider */]) === "function" && _d || Object])
     ], PdvPage);
