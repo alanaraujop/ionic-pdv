@@ -59,7 +59,7 @@ export class Funcionario {
     senha: string = "";
 }
 
-class Item {
+export class Item {
     registro: number;
     numOrcamento: number;
     numPedido: number;

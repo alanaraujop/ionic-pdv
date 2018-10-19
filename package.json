@@ -40,7 +40,7 @@
     "cordova-android": "~6.3.0"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.1.9",
+    "@ionic/app-scripts": "^3.2.0",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",
