@@ -1,7 +1,19 @@
 page-produto {
+    .scroll{
+        margin-top: 40px;
+        height: 100vh;
+        overflow: scroll;
+    }
+    ion-searchbar{
+        z-index: 10;
+        position: absolute;
+    }
     ion-item {
         display: flex;
         flex-direction: row;
+    }
+    .item-block{
+        min-height: 2.5rem !important;
     }
     .active {
         max-height: 200px !important;
@@ -38,5 +50,8 @@ page-produto {
         display: flex;
         flex-direction: row;
         justify-content: center;
+    }
+    .label-md{
+        margin: 0;
     }
 }

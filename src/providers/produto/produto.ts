@@ -20,7 +20,14 @@ export class ProdutoProvider {
   }
 
   getAllProduto(){
-    return this.produtos;
+    if(this.produtos)
+      return this.produtos;
+    else{
+      this.getHttpAllProduto().subscribe(produtos => { 
+                                        this.produtos = produtos;
+                                        return produtos;
+                                        })
+    }
   }
 
   setAllProduto(_produtos){

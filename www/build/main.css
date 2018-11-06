@@ -25882,6 +25882,17 @@ page-login .form {
   border-radius: 10px;
 }
 
+page-produto .scroll {
+  margin-top: 40px;
+  height: 100vh;
+  overflow: scroll;
+}
+
+page-produto ion-searchbar {
+  z-index: 10;
+  position: absolute;
+}
+
 page-produto ion-item {
   display: -webkit-box;
   display: -webkit-flex;
@@ -25892,6 +25903,10 @@ page-produto ion-item {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+}
+
+page-produto .item-block {
+  min-height: 2.5rem !important;
 }
 
 page-produto .active {
@@ -25959,4 +25974,8 @@ page-produto .btn-detalhes {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+page-produto .label-md {
+  margin: 0;
 }

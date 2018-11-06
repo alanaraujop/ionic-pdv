@@ -30,19 +30,27 @@ export class ProdutoPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public produtoProvider: ProdutoProvider,
-    public orderPipe: OrderPipe
+    public orderPipe: OrderPipe,
+    public loadingCtrl: LoadingController
   ) {
   }
 
   ionViewDidLoad(){
+    let load = this.loadingCtrl.create({ content: "Aguarde um momento..." });
+    setTimeout(() => {
+      load.dismiss();
+    }, 20000);
+    load.present();
+
     this.produtoProvider.getHttpAllProduto()
                         .subscribe(res=>{
                           this.produtoProvider.setAllProduto(res);
-                          this.produtosFull = this.orderPipe.transform(this.produtoProvider.getAllProduto(), 'nome');
+                          this.produtosFull = this.orderPipe.transform(this.produtoProvider.getAllProduto(), 'descricaoCompleta');
                           for (let i = 0; i < 30 ; i++) {
                             this.produtos.push( this.produtosFull[this.produtos.length + i]);
                           }
-                        });
+                          load.dismiss();
+                        }, ()=> load.dismiss());
 
     // this.produtos = this.produtoProvider.getAllProduto();
 
@@ -106,8 +114,9 @@ export class ProdutoPage {
 
     searchText = searchText.toString().toUpperCase();
     return items.filter( it => {
-      let nome = it.nome.toString().toUpperCase();
-      return nome.includes(searchText);
+      let nome = it.descricaoCompleta.toString().toUpperCase();
+      let codProduto = it.codProduto.toString().toUpperCase();
+      return nome.includes(searchText) || codProduto.includes(searchText);
     });
 
    }

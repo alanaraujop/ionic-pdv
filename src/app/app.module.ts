@@ -12,7 +12,6 @@ import { ClientePage } from '../pages/cliente/cliente';
 import { LoginPage } from '../pages/login/login';
 import { ProdutoPage } from '../pages/produto/produto';
 
-import { DadosProvider } from '../providers/dados/dados';
 import { ClienteProvider } from '../providers/cliente/cliente';
 import { OrcamentoProvider } from '../providers/orcamento/orcamento';
 import { LoadingProvider } from '../providers/loading/loading';
@@ -61,7 +60,6 @@ import { PagamentoProvider } from '../providers/pagamento/pagamento';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DadosProvider,
     ClienteProvider,
     OrcamentoProvider,
     LoginProvider,

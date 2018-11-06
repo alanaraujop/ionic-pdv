@@ -11,8 +11,9 @@ export class FilterPipe implements PipeTransform {
 
     searchText = searchText.toString().toUpperCase();
     return items.filter( it => {
-      let nome = it.nome.toString().toUpperCase();
-      return nome.includes(searchText);
+      let nome = it.descricaoCompleta.toString().toUpperCase();
+      let codProduto = it.codProduto.toString();
+      return nome.includes(searchText) || codProduto.includes(searchText);
     });
 
    }

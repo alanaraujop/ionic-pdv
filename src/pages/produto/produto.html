@@ -8,13 +8,13 @@
 
 
 <ion-content>
-
-    <ion-searchbar [(ngModel)]="produtoFilter" (keyup)="debounce.next($event.target.value)"></ion-searchbar>
-
+    
+    <ion-searchbar [(ngModel)]="produtoFilter" placeholder="Buscar" (keyup)="debounce.next($event.target.value)"></ion-searchbar>
+<div class="scroll">
     <!-- <ion-card *ngFor="let produto of produtos | filter: searchProduto | orderBy : 'nome' : 0 : 1"> -->
     <ion-card *ngFor="let produto of produtos">
         <ion-card-header>
-            {{produto.nome}}
+            {{produto.descricaoCompleta}}
         </ion-card-header>
         <ion-card-content>
             <ion-col>
@@ -64,5 +64,5 @@
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
-
+</div>
 </ion-content>
